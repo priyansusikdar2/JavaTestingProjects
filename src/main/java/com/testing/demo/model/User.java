@@ -1,4 +1,4 @@
-package com.testing.demo.model.User;
+package com.testing.demo.model;
 
 import java.util.Objects;
 
