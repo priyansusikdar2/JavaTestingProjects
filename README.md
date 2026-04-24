@@ -4,7 +4,7 @@
 ![JUnit 5](https://img.shields.io/badge/JUnit-5.10.2-green?style=flat-square&logo=junit5)
 ![Mockito](https://img.shields.io/badge/Mockito-5.14.2-brightgreen?style=flat-square)
 ![AssertJ](https://img.shields.io/badge/AssertJ-3.25.3-blue?style=flat-square)
-![Maven](https://img.shields.io/badge/Maven-3.9.0-red?style=flat-square)
+![Maven](https://img.shields.io/badge/Maven-3.9.15-red?style=flat-square)
 ![Tests](https://img.shields.io/badge/Tests-118-yellow?style=flat-square)
 ![Pass Rate](https://img.shields.io/badge/Pass%20Rate-98.3%25-success?style=flat-square)
 
