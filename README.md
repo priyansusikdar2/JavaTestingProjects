@@ -159,7 +159,7 @@ start target/site/jacoco/index.html  # Windows
 │ Total Tests Written:        118          │
 │ Tests Passing:              118          │
 │ Tests Failing:              0            │
-│ Overall Pass Rate:          100%        │
+│ Overall Pass Rate:          100%         │
 │ Test Classes:               4            │
 │ Lines of Test Code:         ~2500        │
 │ Mock Objects Created:       100+         │
