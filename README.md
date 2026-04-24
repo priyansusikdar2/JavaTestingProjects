@@ -74,57 +74,88 @@
 ---
 
 ## 📁 **PROJECT STRUCTURE**
+
+```
 software-testing-demo/
 │
 ├── src/main/java/com/testing/demo/
-│ ├── model/
-│ │ ├── User.java # User entity
-│ │ └── Product.java # Product entity with calculations
-│ ├── service/
-│ │ ├── UserService.java # User business logic
-│ │ ├── ProductService.java # Product business logic
-│ │ └── EmailService.java # Email simulation
-│ ├── repository/
-│ │ ├── UserRepository.java # In-memory user storage
-│ │ └── ProductRepository.java # In-memory product storage
-│ └── exception/
-│ └── UserNotFoundException.java
+│   ├── model/
+│   │   ├── User.java           # User entity
+│   │   └── Product.java        # Product entity with calculations
+│   ├── service/
+│   │   ├── UserService.java    # User business logic (24 tests)
+│   │   ├── ProductService.java # Product business logic (60 tests)
+│   │   └── EmailService.java   # Email simulation
+│   ├── repository/
+│   │   ├── UserRepository.java # In-memory user storage
+│   │   └── ProductRepository.java # In-memory product storage
+│   └── exception/
+│       └── UserNotFoundException.java
 │
 └── src/test/java/com/testing/demo/
-├── unit/
-│ ├── UserServiceTest.java # 24 ✅ Unit tests
-│ └── ProductServiceTest.java # 60 ⚠️ Unit tests
-├── integration/
-│ └── UserServiceIntegrationTest.java # 8 ✅ Integration tests
-└── mock/
-└── UserServiceMockTest.java # 26 ⚠️ Mock tests
+    ├── unit/
+    │   ├── UserServiceTest.java      # 24 ✅ Unit tests (ALL PASSING)
+    │   └── ProductServiceTest.java   # 60 ⚠️ Unit tests (1 failing)
+    ├── integration/
+    │   └── UserServiceIntegrationTest.java # 8 ✅ Integration tests (ALL PASSING)
+    └── mock/
+        └── UserServiceMockTest.java  # 26 ⚠️ Mock tests (1 failing)
+```
 
+---
 
 ## 💻 **HOW TO RUN TESTS**
-1. Right-click on src/test/java
+
+### **Using IntelliJ IDEA**
+```
+1. Right-click on src/test/java folder
 2. Select "Run 'All Tests'"
 3. OR right-click individual test class
-4. Select "Run with Coverage" for metrics
+4. Select "Run with Coverage" for detailed metrics
+```
 
-🔮 FUTURE IMPROVEMENTS
-Fix remaining 2 failing tests (Target: 100% pass rate)
+### **Using Maven Command Line**
+```bash
+# Run all tests
+mvn clean test
 
-1) Add Spring Boot integration tests
+# Run specific test class
+mvn test -Dtest=UserServiceTest
+mvn test -Dtest=ProductServiceTest
+mvn test -Dtest=UserServiceIntegrationTest
+mvn test -Dtest=UserServiceMockTest
 
-2) Implement TestContainers for database testing
+# Generate coverage report
+mvn clean test jacoco:report
 
-3) Add performance/load tests
+# View coverage report
+open target/site/jacoco/index.html   # macOS
+start target/site/jacoco/index.html  # Windows
+```
 
-4) Configure GitHub Actions CI/CD
+---
 
-5) Add mutation testing with PITest
+## 🔮 **FUTURE IMPROVEMENTS**
 
-6) Create BDD tests with Cucumber
+### **Short Term (Next Week)**
+- [ ] Fix remaining 2 failing tests (Target: 100% pass rate)
 
-7) Add API contract testing
+### **Medium Term (Next Month)**
+1. Add Spring Boot integration tests
+2. Implement TestContainers for database testing
+3. Add performance/load tests with JMeter
 
-📊 QUICK STATS CARD
-text
+### **Long Term (Next Quarter)**
+4. Configure GitHub Actions CI/CD pipeline
+5. Add mutation testing with PITest
+6. Create BDD tests with Cucumber
+7. Add API contract testing with REST Assured
+
+---
+
+## 📊 **QUICK STATS CARD**
+
+```
 ┌──────────────────────────────────────────┐
 │          PROJECT STATISTICS              │
 ├──────────────────────────────────────────┤
@@ -137,25 +168,36 @@ text
 │ Mock Objects Created:       100+         │
 │ Assertions Written:         500+         │
 │ Coverage Achieved:          95%+         │
+│ Hours of Learning:          100+         │
 └──────────────────────────────────────────┘
-🤝 CONNECT WITH ME
-https://img.shields.io/badge/GitHub-100000?style=flat-square&logo=github&logoColor=white
-https://img.shields.io/badge/LinkedIn-0077B5?style=flat-square&logo=linkedin&logoColor=white
-https://img.shields.io/badge/Twitter-1DA1F2?style=flat-square&logo=twitter&logoColor=white
+```
 
-📄 LICENSE
-This project is for educational purposes as a learning resource for software testing.
+---
+
+## 🤝 **CONNECT WITH ME**
+
+[![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/yourusername)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/yourprofile)
+[![Twitter](https://img.shields.io/badge/Twitter-1DA1F2?style=for-the-badge&logo=twitter&logoColor=white)](https://twitter.com/yourhandle)
+
+---
+
+## 📄 **LICENSE**
+
+This project is for **educational purposes** as a learning resource for software testing.
+
+---
 
 <div align="center">
-⭐ IF YOU FIND THIS PROJECT USEFUL, PLEASE GIVE IT A STAR! ⭐
-This is my first testing project - 118 tests, countless lessons, and a journey into quality assurance
 
-"Every expert was once a beginner. These 118 tests are just the beginning!"
+### ⭐ **IF YOU FIND THIS PROJECT USEFUL, PLEASE GIVE IT A STAR!** ⭐
 
-Built with ☕ Java, 🧪 JUnit, 🎭 Mockito, and a passion for quality code
+**This is my first testing project - 118 tests, countless lessons, and a journey into quality assurance**
 
- - My First Testing Project
+*"Every expert was once a beginner. These 118 tests are just the beginning!"*
 
-</div> ```
-Just copy the entire box above and paste it directly into your GitHub repository's README.md file. It will render beautifully with all formatting, tables, badges, and emojis! 🎉
+---
 
+**Built with ☕ Java, 🧪 JUnit, 🎭 Mockito, and a passion for quality code**
+
+</div>
