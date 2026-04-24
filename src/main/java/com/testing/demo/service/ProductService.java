@@ -38,14 +38,15 @@ public class ProductService {
     }
 
     public List<Product> getProductsByPriceRange(double min, double max) {
+        // FIXED: Check for negative values FIRST before comparing min/max
         if (min < 0) {
             throw new IllegalArgumentException("Minimum price cannot be negative");
         }
-        if (max < min) {
-            throw new IllegalArgumentException("Maximum price cannot be less than minimum price");
-        }
         if (max < 0) {
             throw new IllegalArgumentException("Maximum price cannot be negative");
+        }
+        if (max < min) {
+            throw new IllegalArgumentException("Maximum price cannot be less than minimum price");
         }
         return productRepository.findProductsInPriceRange(min, max);
     }
