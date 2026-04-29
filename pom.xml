@@ -12,6 +12,7 @@
 
     <name>Software Testing Mastery Project</name>
     <description>My first testing journey - 118 tests with JUnit 5, Mockito, and AssertJ</description>
+    <url>https://github.com/priyansusikdar2/JavaTestingProjects</url>
 
     <properties>
         <maven.compiler.source>23</maven.compiler.source>
@@ -23,6 +24,9 @@
         <junit.jupiter.version>5.10.2</junit.jupiter.version>
         <mockito.version>5.14.2</mockito.version>
         <assertj.version>3.26.3</assertj.version>
+
+        <!-- JMeter Versions -->
+        <jmeter.version>5.6.3</jmeter.version>
 
         <!-- Plugin Versions -->
         <maven.surefire.version>3.2.5</maven.surefire.version>
@@ -90,6 +94,28 @@
             <version>1.15.11</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- JMeter Dependencies for Java API (Optional - for advanced load testing) -->
+        <dependency>
+            <groupId>org.apache.jmeter</groupId>
+            <artifactId>ApacheJMeter_core</artifactId>
+            <version>${jmeter.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.jmeter</groupId>
+            <artifactId>ApacheJMeter_java</artifactId>
+            <version>${jmeter.version}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.jmeter</groupId>
+            <artifactId>ApacheJMeter_components</artifactId>
+            <version>${jmeter.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -121,9 +147,16 @@
                         <include>**/*Tests.java</include>
                         <include>**/*TestCase.java</include>
                     </includes>
+
+                    <!-- Exclude performance tests by default -->
+                    <excludes>
+                        <exclude>**/performance/**/*Test.java</exclude>
+                    </excludes>
+
                     <!-- Test report formatting -->
                     <reportFormat>plain</reportFormat>
                     <printSummary>true</printSummary>
+
                     <!-- Java 23 specific arguments -->
                     <argLine>
                         --add-opens java.base/java.lang=ALL-UNNAMED
@@ -131,9 +164,11 @@
                         --add-opens java.base/java.lang.reflect=ALL-UNNAMED
                         --add-opens java.base/java.text=ALL-UNNAMED
                         --add-opens java.desktop/java.awt.font=ALL-UNNAMED
+                        --add-opens java.desktop/sun.awt=ALL-UNNAMED
                         -XX:+EnableDynamicAgentLoading
                         -Dnet.bytebuddy.experimental=true
                     </argLine>
+
                     <!-- Parallel test execution -->
                     <parallel>methods</parallel>
                     <threadCount>4</threadCount>
@@ -189,6 +224,93 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!-- Exec Maven Plugin for running custom load test runners -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.3.0</version>
+                <configuration>
+                    <mainClass>com.testing.demo.performance.LoadTestRunner</mainClass>
+                    <cleanupDaemonThreads>false</cleanupDaemonThreads>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
+
+    <profiles>
+        <!-- Performance Testing Profile (Custom Load Tests) -->
+        <profile>
+            <id>performance</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <includes>
+                                <include>**/performance/**/*Test.java</include>
+                            </includes>
+                            <excludes>
+                                <exclude>none</exclude>
+                            </excludes>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!-- Full Test Profile (including performance) -->
+        <profile>
+            <id>full-test</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <includes>
+                                <include>**/*Test.java</include>
+                            </includes>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!-- Quick Test Profile (no parallel execution) -->
+        <profile>
+            <id>quick</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <parallel>none</parallel>
+                            <threadCount>1</threadCount>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+
+        <!-- Load Test Profile (runs only load tests) -->
+        <profile>
+            <id>loadtest</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-surefire-plugin</artifactId>
+                        <configuration>
+                            <includes>
+                                <include>**/LoadTest.java</include>
+                            </includes>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
 </project>
