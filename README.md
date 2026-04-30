@@ -79,7 +79,7 @@
 | **Maven** | 3.9+ | Build automation |
 | **JaCoCo** | 0.8.12 | Code coverage |
 | **Byte Buddy** | 1.15.11 | Mock generation |
-| **JMeter** | 5.6.3 | Performance testing (extensible) |
+| **JMeter** | 5.6.3 | Performance testing |
 
 ---
 
@@ -119,103 +119,146 @@ software-testing-demo/
 ## 💻 **HOW TO RUN TESTS**
 
 ### **Using IntelliJ IDEA**
-- Right-click on `src/test/java`
+- Right-click `src/test/java`
 - Click **Run 'All Tests'**
-- Or run individual classes
+- Or run individual test classes
 - Use **Run with Coverage** for metrics
 
----
+### **Using Maven**
 
-### **Using Maven Command Line**
-
-#### **Run All Tests**
 ```bash
+# Run all tests
 mvn clean test
-```
 
-#### **Run Specific Tests**
-```bash
+# Run specific tests
 mvn test -Dtest=UserServiceTest
 mvn test -Dtest=ProductServiceTest
 mvn test -Dtest=UserServiceIntegrationTest
 mvn test -Dtest=UserServiceMockTest
 ```
 
----
-
-### **Performance & Load Tests**
+### **Performance Tests 🚀**
 ```bash
 mvn test -Pperformance
+
 mvn test -Dtest=LoadTest#testConcurrentUserCreation
 mvn test -Dtest=LoadTest#testConcurrentProductCreation
 mvn test -Dtest=LoadTest#testConcurrentProductLookups
+
 mvn clean test -Pfull-test
 mvn test -Pquick
 ```
 
----
-
-### **Coverage Reports**
+### **JMeter Tests 🚀**
 ```bash
-mvn clean test jacoco:report
-start target/site/jacoco/index.html
+.\run-jmeter-clean.ps1
+
+jmeter -n -t src/test/jmeter/user-load-test.jmx \
+-l target/jmeter-results.jtl \
+-e -o target/jmeter-report \
+-JTHREADS=50 -JRAMP_UP=10 -JLOOPS=5
 ```
 
 ---
 
-## 📈 PERFORMANCE METRICS
+## 📈 **PERFORMANCE METRICS**
 
-| Scenario | Threads | Operations | Avg Duration | Throughput |
-|----------|--------|-----------|-------------|-----------|
-| User Creation | 100 | 1000 | ~1250ms | 800/sec |
-| Product Creation | 50 | 500 | ~850ms | 588/sec |
-| Lookups | 200 | 10000 | ~2100ms | 4762/sec |
+| Test Scenario | Threads | Operations | Avg Duration | Throughput |
+|--------------|--------|-----------|-------------|------------|
+| Concurrent User Creation | 100 | 1000 | ~1250ms | 800 users/sec |
+| Concurrent Product Creation | 50 | 500 | ~850ms | 588 products/sec |
+| Product Lookups | 200 | 10000 | ~2100ms | 4762 ops/sec |
 
 ---
 
-## 🔮 FUTURE IMPROVEMENTS
+## 🔮 **FUTURE IMPROVEMENTS**
 
-### ✅ Completed
-- Performance testing framework
-- Concurrent operations testing
-- Stress testing
+### ✅ COMPLETED
+- Performance testing suite
+- Concurrent testing
+- JMeter integration
 
-### 🚧 Next
-- Spring Boot tests
-- TestContainers
-- JMeter plans
-
-### 🚀 Long Term
-- CI/CD (GitHub Actions)
+### 🚧 NEXT
+- Spring Boot integration tests
+- TestContainers support
+- CI/CD with GitHub Actions
 - Mutation testing (PITest)
-- BDD (Cucumber)
-- API testing (REST Assured)
+- REST Assured API testing
+- Performance monitoring
 
 ---
 
-## 📊 PROJECT STATS
+## 📊 **QUICK STATS CARD**
 
 ```
-Total Tests: 121
-Pass Rate: 100%
-Coverage: 95%+
-Assertions: 550+
-Lines of Test Code: ~2800
+Total Tests Written:        121
+Tests Passing:              121
+Tests Failing:              0
+Pass Rate:                  100%
+Test Classes:               5
+Lines of Test Code:         ~2800
+Mock Objects Created:       100+
+Assertions Written:         550+
+Coverage Achieved:          95%+
+Performance Tests:          3
+Max Concurrent Users:       1000+
+Hours of Learning:          100+
 ```
 
 ---
 
-## 📄 LICENSE
+## 🚀 **RECENT UPGRADES (April 2026)**
+
+### Performance Testing Suite
+- Added load testing framework
+- 1000 concurrent users testing
+- 10,000+ operations testing
+
+### JMeter Integration
+- JMeter test plans
+- HTML reports
+- Java sampler integration
+
+### Coverage Improvements
+- Test count: 118 → 121
+- Maintained 100% pass rate
+
+---
+
+## 📁 **NEW FILES ADDED**
+
+```
+performance/LoadTest.java
+jmeter/user-load-test.jmx
+UserServiceSampler.java
+run-jmeter-clean.ps1
+```
+
+---
+
+## 🤝 **CONTRIBUTING**
+
+- Add edge test cases
+- Improve performance tests
+- Add database testing
+- Try distributed load testing
+
+---
+
+## 📄 **LICENSE**
+
 Educational project for learning software testing.
 
 ---
 
 <div align="center">
 
-⭐ Star this repo if it helped you! ⭐
+⭐ IF YOU FIND THIS PROJECT USEFUL, PLEASE GIVE IT A STAR! ⭐  
 
-"Every expert was once a beginner."
+"Every expert was once a beginner."  
 
-Built with ☕ Java | 🧪 JUnit | 🎭 Mockito | 📦 Maven | ⚡ JMeter
+Built with ☕ Java | 🧪 JUnit | 🎭 Mockito | 📦 Maven | ⚡ JMeter  
+
+🚀 From Unit → Integration → Mock → Performance Testing  
 
 </div>
