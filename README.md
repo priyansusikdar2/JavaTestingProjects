@@ -157,6 +157,8 @@ jmeter -n -t src/test/jmeter/user-load-test.jmx \
 -l target/jmeter-results.jtl \
 -e -o target/jmeter-report \
 -JTHREADS=50 -JRAMP_UP=10 -JLOOPS=5
+.\run-jmeter-clean.ps1
+Remove-Item -Path target/jmeter-results.jtl, target/jmeter-report -Force -Recurse -ErrorAction SilentlyContinue; & "C:\Users\Priyansu Sikdar\Downloads\apache-jmeter-5.6.3\apache-jmeter-5.6.3\bin\jmeter.bat" -n -t src/test/jmeter/user-load-test.jmx -l target/jmeter-results.jtl -e -o target/jmeter-report -JTHREADS=50 -JRAMP_UP=10 -JLOOPS=5
 ```
 
 ---
